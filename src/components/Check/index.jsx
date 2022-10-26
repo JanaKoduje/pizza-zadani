@@ -11,9 +11,10 @@ const Check = ({ checked, onChange, vegan }) => {
   };
 
   return (
-    <button 
-      className={`check ${veganOnly && !vegan ? 'check--disabled' : ''}`}
-      onClick={handleClick} disabled={veganOnly && !vegan}
+    <button
+      className={`check ${veganOnly && !vegan ? "check--disabled" : ""}`}
+      onClick={handleClick}
+      disabled={veganOnly && !vegan}
     >
       {checked ? "✓" : ""}
     </button>

@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import ToppingsSelect from "./components/ToppingsSelect";
+import Header from "./components/Header";
 import "./style.css";
 
 import { PrefsContext } from "./prefs-context";
@@ -81,24 +82,19 @@ const toppings = [
 ];
 
 const App = () => {
-
-  const [veganOnly,setVeganOnly] = useState(true);
+  const [veganOnly, setVeganOnly] = useState(true);
   const changeVegans = () => {
     setVeganOnly(!veganOnly);
-  }
-
+  };
 
   return (
-    <PrefsContext.Provider value={{veganOnly, changeVegans}}>
-    <div className="container">
-      <header>
-        <div className="pizza" />
-        <h1>Build your own pizza</h1>
-      </header>
-      <main>
-        <ToppingsSelect toppings={toppings} />
-      </main>
-    </div>
+    <PrefsContext.Provider value={{ veganOnly, changeVegans }}>
+      <div className="container">
+        <Header />
+        <main>
+          <ToppingsSelect toppings={toppings} />
+        </main>
+      </div>
     </PrefsContext.Provider>
   );
 };
