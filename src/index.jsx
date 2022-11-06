@@ -83,12 +83,13 @@ const toppings = [
 
 const App = () => {
   const [veganOnly, setVeganOnly] = useState(true);
-  const changeVegans = () => {
+  
+  const toggleVeganOnly = () => {
     setVeganOnly(!veganOnly);
   };
 
   return (
-    <PrefsContext.Provider value={{ veganOnly, changeVegans }}>
+    <PrefsContext.Provider value={{ veganOnly, toggleVeganOnly }}>
       <div className="container">
         <Header />
         <main>

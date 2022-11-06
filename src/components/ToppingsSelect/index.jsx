@@ -4,26 +4,27 @@ import "./style.css";
 
 const ToppingsSelect = ({ toppings }) => {
   const [selectedToppings, setSelectedToppings] = useState(toppings);
-  const [count, setCount] = useState([]);
 
-  const handleSelectChanged = (index, select) => {
+  const handleSelectChanged = (index) => {
     const newToppings = [...selectedToppings];
-    newToppings[index].selected = select;
+    newToppings[index].selected = !newToppings[index].selected;
     setSelectedToppings(newToppings);
-
-    const newCount = newToppings.filter((top) => top.selected === true);
-    setCount(newCount);
   };
 
-  const price = count.reduce((previous, object) => {
-    return previous + object.price;
-  }, 0);
-
+  const totalPrice = selectedToppings.reduce(
+    (sum, { selected, price }) => (selected ? sum + price : sum),
+    0
+  );
+  const selectedNumber = selectedToppings.reduce(
+    (number, { selected }) => (selected ? number + 1 : number),
+    0
+  );
   return (
     <>
       <p>Choose as many toppings as you want</p>
       <p>
-        Selected toppings: {count.length}, total price: {price.toFixed(2)} Euro
+        Selected toppings: {selectedNumber}, total price: {totalPrice.toFixed(2)} {" "}
+        Euro
       </p>
 
       <div className="toppings">
@@ -31,7 +32,7 @@ const ToppingsSelect = ({ toppings }) => {
           <Topping
             topping={topping}
             key={topping.name}
-            onSelectedChange={(select) => handleSelectChanged(index, select)}
+            onSelectedChange={() => handleSelectChanged(index)}
           />
         ))}
       </div>
